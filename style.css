@@ -1,0 +1,12 @@
+.all {
+    width: 100vw;
+    height: 100vh;
+    background-color: wheat;
+}
+.zagraj {
+    margin: 30px;
+}
+
+.pierwszy, .drugi, .trzeci {
+    height: 100px;
+}
