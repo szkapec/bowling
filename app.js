@@ -165,7 +165,7 @@ if(iloscRzutow<10) {
     if(liczbaGraczy == 1) {
         let randomowo = Math.floor(Math.random()*11)
         console.log(randomowo + " tyle zbitych")
-      
+
             if(gracz1Btn1.disabled == false)
             {
                 gracz1Btn1.classList.remove('active')
@@ -218,7 +218,7 @@ if(iloscRzutow<10) {
                 }
         }
         sprawdzCzy10 = 0;
-        maxymalnaIloscRzutow.innerHTML = `rzutów: ${iloscRzutow}`;
+        maxymalnaIloscRzutow.innerHTML = `Tura: ${iloscRzutow}`;
 }
         
 
@@ -558,12 +558,6 @@ gracz2btn1.addEventListener('click', losuj)
 gracz2btn2.addEventListener('click', losuj)
 gracz3Btn1.addEventListener('click', losuj)
 gracz3Btn2.addEventListener('click', losuj)
-
-
-
-
-
-
 
 zagraj.addEventListener('click' , iloscOsob)
 
