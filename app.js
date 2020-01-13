@@ -46,6 +46,9 @@ const gracz3PunktyJednorazowe2 = document.createElement('div')
 
 const maxymalnaIloscRzutow = document.querySelector('.max');
 const iloscGraczy = document.querySelector('.wyborO')
+const wygrana = document.querySelector('.wygrana')
+
+
 
 let pktGracz1 = 0;
 let pktGracz2 = 0;
@@ -54,12 +57,19 @@ let max10 = 0;
 let sprawdzCzy10 = 0;
 let iloscRzutow = 0; 
 let i = 0;
-
+let liczbaGraczy=0;
 
 const iloscOsob = () => {
-   
-    
-    if(iloscGraczy.value == 1) {
+
+
+  zagraj.disabled = true
+
+
+   gracz1Btn1.classList.add('activ')
+    liczbaGraczy = iloscGraczy.value.slice(0,1)
+
+
+    if(liczbaGraczy == 1) {
         i++;
         gracz1Btn1.innerHTML = "Pierwszy rzut";
         gracz1Btn2.innerHTML = "drugi rzut";
@@ -79,7 +89,7 @@ const iloscOsob = () => {
 
 
 
-    if(iloscGraczy.value == 2) {
+    if(liczbaGraczy == 2) {
       i++;
       gracz1Btn1.innerHTML = "Pierwszy rzut";
       gracz1Btn2.innerHTML = "drugi rzut";
@@ -107,7 +117,7 @@ const iloscOsob = () => {
         }
     }
 
-    if(iloscGraczy.value == 3) {
+    if(liczbaGraczy == 3) {
         i++;
         gracz1Btn1.innerHTML = "Pierwszy rzut";
         gracz1Btn2.innerHTML = "drugi rzut";
@@ -148,35 +158,44 @@ const iloscOsob = () => {
 }
 
 const losuj = () => {
-//dla ilosci graczy 1;
 
-if(iloscRzutow<10) {
 
-    if(iloscGraczy.value == 1) {
+if(iloscRzutow<5) {
+
+    if(liczbaGraczy == 1) {
         let randomowo = Math.floor(Math.random()*11)
         console.log(randomowo + " tyle zbitych")
       
             if(gracz1Btn1.disabled == false)
             {
-                
-    
+                gracz1Btn1.classList.remove('active')
+                gracz1Btn2.classList.add('active')
+
                 sprawdzCzy10 = randomowo;
                 max10 = randomowo;
                 pktGracz1 = pktGracz1 + randomowo
-                punktyGracz1.innerHTML = "Suma punktow gracza nr 1:  " + pktGracz1;
-                gracz1PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+                
+                gracz1PunktyJednorazowe1.innerHTML = `Rz:1: <span>${randomowo}</span>`
                 if(sprawdzCzy10==10) {
                     gracz1Btn1.disabled = false;
                     gracz1Btn2.disabled = true;
                     pktGracz1 = pktGracz1 + 5;
+                    gracz1Btn2.classList.remove('active')
+                    gracz1Btn1.classList.add('active')
                     ++iloscRzutow;
                 }
                 else {
                     gracz1Btn2.disabled = false;
                     gracz1Btn1.disabled = true;
                 }
+                punktyGracz1.innerHTML = "Suma punktow gracza nr 1:  " + pktGracz1;
             }
             else if(gracz1Btn2.disabled == false) {
+
+                gracz1Btn1.classList.add('active')
+                gracz1Btn2.classList.remove('active')
+
+
                 gracz1Btn2.disabled = true;
                 gracz1Btn1.disabled = false;
                 let warunek = max10 + randomowo;
@@ -185,49 +204,53 @@ if(iloscRzutow<10) {
                 {
                     sprawdzCzy10 = randomowo;
                     pktGracz1 = pktGracz1 + randomowo;
-                    punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
+                    
                     console.log(warunek + "WARRUNEK")
-                    gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+                    gracz1PunktyJednorazowe2.innerHTML = `Rz:2: <span>${randomowo}</span>`
                     if(sprawdzCzy10==10) {
                         gracz1Btn1.disabled = false;
                         gracz1Btn2.disabled = true;
-                    } 
+                    }
+                    punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1; 
                 }
                 else if(warunek > 10) {
-                    gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+                    gracz1PunktyJednorazowe2.innerHTML = `Rz:2: <span>0</span>`
                 }
         }
         sprawdzCzy10 = 0;
         maxymalnaIloscRzutow.innerHTML = `rzutów: ${iloscRzutow}`;
-        }
+}
         
-        
-       
-    
-//dla ilosci graczy 2;
-    if(iloscGraczy.value == 2) {
+
+    if(liczbaGraczy == 2) {
     let randomowo = Math.floor(Math.random()*11)
 
     console.log(randomowo + " tyle zbitych")
 
     if(gracz1Btn1.disabled == false)
     {
-        
+        gracz1Btn1.classList.remove('active')
+        gracz1Btn2.classList.add('active')
+
         sprawdzCzy10 = randomowo;
         max10 = randomowo;
         pktGracz1 = pktGracz1 + randomowo
-        punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
-        gracz1PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+        
+        gracz1PunktyJednorazowe1.innerHTML = `Rz:1: <span> ${randomowo} </span>`
         if(sprawdzCzy10==10) {
             gracz2btn1.disabled = false;
             gracz1Btn1.disabled = true;
             gracz1Btn2.disabled = true;
             pktGracz1 = pktGracz1 + 5;
+            gracz1Btn2.classList.remove('active')
+            gracz2btn1.classList.add('active')
         }
         else {
             gracz1Btn2.disabled = false;
             gracz1Btn1.disabled = true;
+            
         }
+        punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
         
     }
 
@@ -235,64 +258,79 @@ if(iloscRzutow<10) {
         gracz1Btn2.disabled = true;
         gracz2btn1.disabled = false;
 
+        gracz1Btn2.classList.remove('active')
+        gracz2btn1.classList.add('active')
+
+
         let warunek = max10 + randomowo;
         
         if(warunek <= 10)
         {
             sprawdzCzy10 = randomowo;
             pktGracz1 = pktGracz1 + randomowo;
-            punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
+            
             console.log(warunek + "WARRUNEK")
-            gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+            gracz1PunktyJednorazowe2.innerHTML = `Rz:2: <span> ${randomowo} </span>`
             if(sprawdzCzy10==10) {
                 gracz2btn1.disabled = true;
                 gracz1Btn2.disabled = false;
             }
-            
+            punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
         }
         else if(warunek > 10) {
-            gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+            gracz1PunktyJednorazowe2.innerHTML = `Rz:2: <span> 0 </span>`
         }
 
     }
     else if(gracz2btn1.disabled == false) {
         sprawdzCzy10 = randomowo;
         max10 = randomowo;
+
+        gracz2btn1.classList.remove('active')
+        gracz2btn2.classList.add('active')
+
         pktGracz2 = pktGracz2 + randomowo
-        punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
-        gracz2PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+        
+        gracz2PunktyJednorazowe1.innerHTML = `Rz:1: <span> ${randomowo} </span>`
         if(sprawdzCzy10==10) {
             gracz2btn1.disabled = true;
             gracz2btn2.disabled = true;
             gracz1Btn1.disabled = false;
 
             pktGracz2 = pktGracz2 + 5;
+            gracz2btn2.classList.remove('active')
+            gracz1Btn1.classList.add('active')
             ++iloscRzutow;
+            
         }
         else {
             gracz2btn1.disabled = true;
             gracz2btn2.disabled = false;
         }
+        punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
     }
     
     else if(gracz2btn2.disabled == false) {
         gracz2btn2.disabled = true;
         gracz1Btn1.disabled = false;
+
+        gracz2btn2.classList.remove('active')
+        gracz1Btn1.classList.add('active')
         let warunek = max10 + randomowo;
         ++iloscRzutow;
         if(warunek <= 10)
         {
             sprawdzCzy10 = randomowo;
             pktGracz2 = pktGracz2 + randomowo;
-            punktyGracz2.innerHTML = "Suma punktow gracza nr 1: " + pktGracz2;
-            gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+            punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
+            gracz2PunktyJednorazowe2.innerHTML = `Rz:2: <span> ${randomowo} </span>`
             if(sprawdzCzy10==10) {
                 gracz2btn2.disabled = true;
                 gracz1Btn1.disabled = false;
             }
         }
         else if(warunek > 10) {
-            gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+            gracz2PunktyJednorazowe2.innerHTML = `Rz:2: <span> 0 </span>`
         }
     }
     sprawdzCzy10 = 0;
@@ -300,8 +338,7 @@ if(iloscRzutow<10) {
 }
 
 
-//dla ilosci graczy 3
-if(iloscGraczy.value == 3) {
+    if(liczbaGraczy == 3) {
 
     let randomowo = Math.floor(Math.random()*11)
 
@@ -309,38 +346,43 @@ if(iloscGraczy.value == 3) {
 
     if(gracz1Btn1.disabled == false)
     {
-        
+        gracz1Btn1.classList.remove('active')
+        gracz1Btn2.classList.add('active')
+
         sprawdzCzy10 = randomowo;
         max10 = randomowo;
         pktGracz1 = pktGracz1 + randomowo
-        punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
-        gracz1PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+        
+        gracz1PunktyJednorazowe1.innerHTML = `Rz:1: <span> ${randomowo} </span>`
         if(sprawdzCzy10==10) {
             gracz2btn1.disabled = false;
             gracz1Btn1.disabled = true;
             gracz1Btn2.disabled = true;
+            gracz1Btn2.classList.remove('active')
+            gracz2btn1.classList.add('active')
             pktGracz1 = pktGracz1 + 5;
         }
         else {
             gracz1Btn2.disabled = false;
             gracz1Btn1.disabled = true;
         }
-        
+        punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
     }
 
     else if(gracz1Btn2.disabled == false) {
         gracz1Btn2.disabled = true;
         gracz2btn1.disabled = false;
-
+        gracz1Btn2.classList.remove('active')
+        gracz2btn1.classList.add('active')
         let warunek = max10 + randomowo;
         
         if(warunek <= 10)
         {
             sprawdzCzy10 = randomowo;
             pktGracz1 = pktGracz1 + randomowo;
-            punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + pktGracz1;
+            punktyGracz1.innerHTML = "Suma punktow gracza nr 2: " + pktGracz1;
             console.log(warunek + "WARRUNEK")
-            gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+            gracz1PunktyJednorazowe2.innerHTML = `Rz:2: <span> ${randomowo} </span>`
             if(sprawdzCzy10==10) {
                 gracz2btn1.disabled = true;
                 gracz1Btn2.disabled = false;
@@ -348,20 +390,27 @@ if(iloscGraczy.value == 3) {
             
         }
         else if(warunek > 10) {
-            gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+            gracz1PunktyJednorazowe2.innerHTML = `Rz:1: <span> 0 </span>`
         }
 
     }
     else if(gracz2btn1.disabled == false) {
         sprawdzCzy10 = randomowo;
         max10 = randomowo;
+
+        gracz2btn1.classList.remove('active')
+        gracz2btn2.classList.add('active')
+
         pktGracz2 = pktGracz2 + randomowo
-        punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
-        gracz2PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+        
+        gracz2PunktyJednorazowe1.innerHTML = `Rz:1: <span> ${randomowo} </span>`
         if(sprawdzCzy10==10) {
             gracz2btn1.disabled = true;
             gracz2btn2.disabled = true;
             gracz3Btn1.disabled = false;
+
+            gracz2btn2.classList.remove('active')
+            gracz3Btn1.classList.add('active')
 
             pktGracz2 = pktGracz2 + 5;
         }
@@ -369,51 +418,65 @@ if(iloscGraczy.value == 3) {
             gracz2btn1.disabled = true;
             gracz2btn2.disabled = false;
         }
+        punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
     }
     
     else if(gracz2btn2.disabled == false) {
         gracz2btn2.disabled = true;
         gracz3Btn1.disabled = false;
+
+        gracz2btn2.classList.remove('active')
+        gracz3Btn1.classList.add('active')
+
         let warunek = max10 + randomowo;
         if(warunek <= 10)
         {
             sprawdzCzy10 = randomowo;
             pktGracz2 = pktGracz2 + randomowo;
-            punktyGracz2.innerHTML = "Suma punktow gracza nr 1: " + pktGracz2;
-            gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+            punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + pktGracz2;
+            gracz2PunktyJednorazowe2.innerHTML = `Rz:2: <span> ${randomowo} </span>`
             if(sprawdzCzy10==10) {
                 gracz2btn2.disabled = true;
                 gracz3Btn1.disabled = false;
             }
         }
         else if(warunek > 10) {
-            gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+            gracz2PunktyJednorazowe2.innerHTML = `Rz:2: <span> 0 </span>`
         }
     }
 //
     else if(gracz3Btn1.disabled == false) {
         sprawdzCzy10 = randomowo;
         max10 = randomowo;
+
+        gracz3Btn1.classList.remove('active')
+        gracz3Btn2.classList.add('active');
+
         pktGracz3 = pktGracz3 + randomowo
-        punktyGracz3.innerHTML = "Suma punktow gracza nr 3: " + pktGracz3;
-        gracz3PunktyJednorazowe1.innerHTML = "Rz:1: " + randomowo 
+        
+        gracz3PunktyJednorazowe1.innerHTML = `Rz:1: <span> ${randomowo} </span>`
         if(sprawdzCzy10==10) {
             gracz3Btn1.disabled = true;
             gracz3Btn2.disabled = true;
             gracz1Btn1.disabled = false;
             pktGracz3 = pktGracz3 + 5;
+            gracz3Btn2.classList.remove('active')
+            gracz1Btn1.classList.add('active');
             ++iloscRzutow;
         }
         else {
             gracz3Btn1.disabled = true;
             gracz3Btn2.disabled = false;
         }
+        punktyGracz3.innerHTML = "Suma punktow gracza nr 3: " + pktGracz3;
     }
     
     else if(gracz3Btn2.disabled == false) {
         gracz1Btn1.disabled = false;
         gracz3Btn1.disabled = true;
         gracz3Btn2.disabled = true;
+        gracz3Btn2.classList.remove('active')
+        gracz1Btn1.classList.add('active')
         ++iloscRzutow;
         let warunek = max10 + randomowo;
         if(warunek <= 10)
@@ -421,14 +484,14 @@ if(iloscGraczy.value == 3) {
             sprawdzCzy10 = randomowo;
             pktGracz3 = pktGracz3 + randomowo;
             punktyGracz3.innerHTML = "Suma punktow gracza nr 3: " + pktGracz3;
-            gracz3PunktyJednorazowe2.innerHTML = "Rz:2: " + randomowo 
+            gracz3PunktyJednorazowe2.innerHTML = `Rz:2: <span> ${randomowo} </span>`
             if(sprawdzCzy10==10) {
                 gracz3btn2.disabled = true;
                 gracz1Btn1.disabled = false;
             }
         }
         else if(warunek > 10) {
-            gracz3PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 + " Niestety :("
+            gracz3PunktyJednorazowe2.innerHTML = `Rz:2: <span> 0 </span>`
         }
     }
 
@@ -437,40 +500,54 @@ if(iloscGraczy.value == 3) {
     sprawdzCzy10 = 0;
     maxymalnaIloscRzutow.innerHTML = `rzutów: ${iloscRzutow}`;
 }
-}
-else {
+
+    if(iloscRzutow==5) {
+        console.log(pktGracz1 + "PUNKTY GR1")
+        console.log(pktGracz2 + "PUNKTY GR2")
+        console.log(pktGracz3 + "PUNKTY GR3")
+        if(pktGracz1 >= pktGracz2 && pktGracz1 >= pktGracz3) {
+            wygrana.innerHTML = `Wygrana gracza nr <span>1</span> punkty zdobyte: <span> ${pktGracz1} </span>`;
+        }
+        else if (pktGracz2 > pktGracz1 && pktGracz2>pktGracz3) {
+            wygrana.innerHTML = `Wygrana gracza nr <span>2</span> punkty zdobyte: <span> ${pktGracz2} </span> `;
+        }
+        else if(pktGracz3 >= pktGracz2 && pktGracz3 >= pktGracz1) {
+            wygrana.innerHTML = `Wygrana gracza nr <span>3</span> punkty zdobyte: <span> ${pktGracz3} </span> `;
+        }
+        btnOdNowa.innerHTML = 'Zagraj od nowa! :) '
+        odNowa.appendChild(btnOdNowa)
+        btnOdNowa.addEventListener('click', () => {
+            wygrana.innerHTML = ""
+            iloscRzutow = 0;
+            pktGracz1 = 0;
+            pktGracz2 = 0;
+            pktGracz3 = 0;
+            punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + 0;
+            punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + 0;
+            punktyGracz3.innerHTML = "Suma punktow gracza nr 3: " + 0;
+            gracz1PunktyJednorazowe1.value = 0;
+            gracz1PunktyJednorazowe2.value = 0;
+            gracz2PunktyJednorazowe1.value = 0;
+            gracz2PunktyJednorazowe2.value = 0;
+            gracz3PunktyJednorazowe1.value = 0;
+            gracz3PunktyJednorazowe2.value = 0;
     
-    btnOdNowa.innerHTML = 'Zagraj od nowa! :) '
-    odNowa.appendChild(btnOdNowa)
-    btnOdNowa.addEventListener('click', () => {
-        iloscRzutow = 0;
-        pktGracz1 = 0;
-        pktGracz2 = 0;
-        pktGracz3 = 0;
-        punktyGracz1.innerHTML = "Suma punktow gracza nr 1: " + 0;
-        punktyGracz2.innerHTML = "Suma punktow gracza nr 2: " + 0;
-        punktyGracz3.innerHTML = "Suma punktow gracza nr 3: " + 0;
-        gracz1PunktyJednorazowe1.value = 0;
-        gracz1PunktyJednorazowe2.value = 0;
-        gracz2PunktyJednorazowe1.value = 0;
-        gracz2PunktyJednorazowe2.value = 0;
-        gracz3PunktyJednorazowe1.value = 0;
-        gracz3PunktyJednorazowe2.value = 0;
+            gracz1PunktyJednorazowe1.innerHTML = "Rz:1: " + 0 
+            gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
+            gracz2PunktyJednorazowe1.innerHTML = "Rz:2: " + 0 
+            gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
+            gracz3PunktyJednorazowe1.innerHTML = "Rz:2: " + 0 
+            gracz3PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
+    
+            gracz1Btn1.disabled = false;
+            gracz1Btn2.disabled = true;
+            gracz2btn1.disabled = true;
+            gracz2btn2.disabled = true;
+            gracz3Btn1.disabled = true;
+            gracz3Btn2.disabled = true;
+        })
+    }
 
-        gracz1PunktyJednorazowe1.innerHTML = "Rz:1: " + 0 
-        gracz1PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
-        gracz2PunktyJednorazowe1.innerHTML = "Rz:2: " + 0 
-        gracz2PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
-        gracz3PunktyJednorazowe1.innerHTML = "Rz:2: " + 0 
-        gracz3PunktyJednorazowe2.innerHTML = "Rz:2: " + 0 
-
-        gracz1Btn1.disabled = false;
-        gracz1Btn2.disabled = true;
-        gracz2btn1.disabled = true;
-        gracz2btn2.disabled = true;
-        gracz3Btn1.disabled = true;
-        gracz3Btn2.disabled = true;
-    })
 }
 
 }
