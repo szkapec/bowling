@@ -160,7 +160,7 @@ const iloscOsob = () => {
 const losuj = () => {
 
 
-if(iloscRzutow<5) {
+if(iloscRzutow<10) {
 
     if(liczbaGraczy == 1) {
         let randomowo = Math.floor(Math.random()*11)
@@ -501,7 +501,7 @@ if(iloscRzutow<5) {
     maxymalnaIloscRzutow.innerHTML = `rzutów: ${iloscRzutow}`;
 }
 
-    if(iloscRzutow==5) {
+    if(iloscRzutow==10) {
         console.log(pktGracz1 + "PUNKTY GR1")
         console.log(pktGracz2 + "PUNKTY GR2")
         console.log(pktGracz3 + "PUNKTY GR3")
